@@ -1,0 +1,144 @@
+{
+  "name": "TAG Mockup — Photo Pipeline",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "trigger",
+      "name": "Trigger ▶",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [200, 300]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{ [\n  {\n    \"shot\": \"drpatel\",\n    \"filename\": \"A2_drpatel.jpg\",\n    \"size\": \"1536x1024\",\n    \"quality\": \"high\",\n    \"prompt\": \"Documentary editorial portrait of a mid-40s Indian-American dentist named Dr. Patel, wearing modern dental scrubs in pale blue. He is smiling warmly while gesturing toward an out-of-focus dental chair. Natural daylight from a large window left-frame, warm and gentle. Modern dental office with warm-wood accents — NOT clinical white. Subject sharp focus, shallow depth of field, background gently blurred. Editorial portrait feel. Shot on Leica Q3, 28mm, f/2.8. Real skin, no airbrush. Realistic. No text, no logos.\"\n  },\n  {\n    \"shot\": \"drchen\",\n    \"filename\": \"B2_drchen.jpg\",\n    \"size\": \"1024x1024\",\n    \"quality\": \"high\",\n    \"prompt\": \"Editorial portrait of a 48-year-old Asian-American oral surgeon, short black hair with grey at temples, wearing dark navy medical scrubs (NOT a white coat). Photographed in a softly-lit consultation room — warm gold and shadow, like a Wes Anderson kitchen interior. He is mid-explanation, hands gesturing softly, looking just past the camera. Eyes warm and steady. Background intentionally dark navy. Single warm tungsten light source above and left. Reference: Annie Leibovitz portraits. Realistic, real skin, no airbrush. No text, no logos.\"\n  },\n  {\n    \"shot\": \"maria\",\n    \"filename\": \"B3_maria.jpg\",\n    \"size\": \"1024x1024\",\n    \"quality\": \"high\",\n    \"prompt\": \"Candid documentary photograph of a 52-year-old Latina woman named Maria, laughing genuinely — eyes crinkled, mouth open. NOT a clinical after-photo. She is at a backyard dinner table, evening golden-hour light slanting through nearby trees. Plates and a glass of wine softly visible at frame edge. The smile is NOT the focal subject — the life around her is. Shot at f/2.8, eye-level, medium-format documentary style. Real skin, no airbrush. No text, no logos.\"\n  },\n  {\n    \"shot\": \"intake_wallet\",\n    \"filename\": \"A3a_intake.jpg\",\n    \"size\": \"1024x1024\",\n    \"quality\": \"medium\",\n    \"prompt\": \"Still-life photograph: a worn leather wallet on a wooden countertop, an insurance card peeking out from a pocket, a driver's license resting next to it. Warm morning light from window left, slight shadow play. Real, lived-in objects — not styled. Kinfolk magazine aesthetic. Tight composition, top-down angle. Realistic. No text on the cards (anonymized), no logos.\"\n  },\n  {\n    \"shot\": \"after_exam\",\n    \"filename\": \"A3b_after_exam.jpg\",\n    \"size\": \"1024x1024\",\n    \"quality\": \"medium\",\n    \"prompt\": \"Close-up still-life of two hands holding a clear glass of water, softly out of focus. Cool morning light, neutral palette. Kinfolk magazine aesthetic. The hands are mid-tone skin, age 30s-40s, natural and lived-in. Realistic. No text, no logos.\"\n  },\n  {\n    \"shot\": \"applewatch\",\n    \"filename\": \"B6_applewatch.jpg\",\n    \"size\": \"1024x1024\",\n    \"quality\": \"high\",\n    \"prompt\": \"Close-up of a 52-year-old woman's wrist wearing an Apple Watch in stainless steel with a milanese-loop band. Photographed at 6:30 AM in soft pre-dawn window light. Her sleeve is a soft cream knit. The hand is at rest on a wooden bedside table — a glass of water and a book visible at frame edge. Mood: a private moment of waking. Macro lifestyle editorial. Realistic skin, natural light, shallow depth of field. No text visible on the watch screen. No logos.\"\n  },\n  {\n    \"shot\": \"cc_hero\",\n    \"filename\": \"B1_cc_hero.jpg\",\n    \"size\": \"1536x1024\",\n    \"quality\": \"high\",\n    \"prompt\": \"A 52-year-old Latina woman's hands holding an iPhone in her lap. The screen is intentionally blank/black (will be composited later). Setting: she is sitting on the edge of a bed at evening, warm side-light from a lamp out of frame to the right. Cream sheets crumpled at bottom of frame. Her face is intentionally out of frame — only hands and phone visible. Intimate, premium, editorial. Hasselblad medium format aesthetic, f/2.8. NOT a healthcare ad — closer to an Apple product film. Realistic. No text, no logos.\"\n  },\n  {\n    \"shot\": \"patient_james\",\n    \"filename\": \"B4b_james.jpg\",\n    \"size\": \"1024x1024\",\n    \"quality\": \"medium\",\n    \"prompt\": \"Close-up documentary photo of a 60-year-old white man's hands holding a ceramic coffee mug, slight smile visible at upper frame edge. Morning light, on a wooden porch. Real skin, weathered natural hands. Kinfolk magazine aesthetic. No text, no logos.\"\n  },\n  {\n    \"shot\": \"patient_anne\",\n    \"filename\": \"B4c_anne.jpg\",\n    \"size\": \"1024x1024\",\n    \"quality\": \"medium\",\n    \"prompt\": \"Profile shot of a 58-year-old Black woman speaking to someone off-camera, soft afternoon light, restaurant or living-room setting. She is mid-laugh, leaning forward. Natural skin, real person — NOT a stock model. Documentary editorial. No text, no logos.\"\n  }\n] }}",
+        "options": {}
+      },
+      "id": "shots",
+      "name": "Define Shots",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [400, 300]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "json",
+        "include": "allOtherFields",
+        "options": {}
+      },
+      "id": "split",
+      "name": "Split Shots",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [600, 300]
+    },
+    {
+      "parameters": {
+        "batchSize": 4,
+        "options": {}
+      },
+      "id": "batch",
+      "name": "Batch of 4 (parallel)",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [800, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/images/generations",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "openAiApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"gpt-image-1\",\n  \"prompt\": {{ JSON.stringify($json.prompt) }},\n  \"n\": 1,\n  \"size\": \"{{ $json.size }}\",\n  \"quality\": \"{{ $json.quality }}\"\n}",
+        "options": {
+          "timeout": 180000
+        }
+      },
+      "id": "openai",
+      "name": "OpenAI · gpt-image-1",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1020, 300]
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "data[0].b64_json",
+        "options": {
+          "fileName": "={{ $('Batch of 4 (parallel)').item.json.filename }}",
+          "mimeType": "image/png"
+        }
+      },
+      "id": "tobin",
+      "name": "Base64 → Binary",
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [1240, 300]
+    },
+    {
+      "parameters": {
+        "operation": "write",
+        "fileName": "=/Users/chrismason/Documents/TAG/Mockups/aspen_clearchoice/brand/photos/{{ $('Batch of 4 (parallel)').item.json.filename }}",
+        "options": {}
+      },
+      "id": "write",
+      "name": "Write to Disk",
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1,
+      "position": [1460, 300]
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"shot\": \"{{ $('Batch of 4 (parallel)').item.json.shot }}\",\n  \"file\": \"/Users/chrismason/Documents/TAG/Mockups/aspen_clearchoice/brand/photos/{{ $('Batch of 4 (parallel)').item.json.filename }}\",\n  \"status\": \"saved\",\n  \"timestamp\": \"{{ $now.toISO() }}\"\n}",
+        "options": {}
+      },
+      "id": "log",
+      "name": "Log Result",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [1680, 300]
+    }
+  ],
+  "connections": {
+    "Trigger ▶": {
+      "main": [[{ "node": "Define Shots", "type": "main", "index": 0 }]]
+    },
+    "Define Shots": {
+      "main": [[{ "node": "Split Shots", "type": "main", "index": 0 }]]
+    },
+    "Split Shots": {
+      "main": [[{ "node": "Batch of 4 (parallel)", "type": "main", "index": 0 }]]
+    },
+    "Batch of 4 (parallel)": {
+      "main": [[{ "node": "OpenAI · gpt-image-1", "type": "main", "index": 0 }]]
+    },
+    "OpenAI · gpt-image-1": {
+      "main": [[{ "node": "Base64 → Binary", "type": "main", "index": 0 }]]
+    },
+    "Base64 → Binary": {
+      "main": [[{ "node": "Write to Disk", "type": "main", "index": 0 }]]
+    },
+    "Write to Disk": {
+      "main": [[{ "node": "Log Result", "type": "main", "index": 0 }]]
+    },
+    "Log Result": {
+      "main": [[{ "node": "Batch of 4 (parallel)", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": false,
+    "description": "Generates all photography for the TAG Aspen/ClearChoice mockup. Reads prompts from the Define Shots node, sends each to OpenAI gpt-image-1, saves the resulting image to /brand/photos/. Triggered manually. Requires an 'openAiApi' credential in n8n.\n\nUsage:\n1. In n8n: Settings → Credentials → New → OpenAI → paste OPENAI_API_KEY\n2. Open this workflow, click 'Trigger ▶'\n3. Images land in /Users/chrismason/Documents/TAG/Mockups/aspen_clearchoice/brand/photos/\n4. ~30s per shot, 4-at-a-time batching, full run ~3-4 minutes"
+  },
+  "tags": [
+    { "name": "TAG", "createdAt": "2026-05-18T14:00:00.000Z" },
+    { "name": "Image Gen", "createdAt": "2026-05-18T14:00:00.000Z" }
+  ]
+}
