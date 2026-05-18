@@ -2,8 +2,31 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=1440, initial-scale=1" />
-<title>TAG Mobile — Aspen Dental & ClearChoice · Native iOS Comps</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>TAG Mobile · Aspen Dental & ClearChoice · Native iOS, by Branding Brand</title>
+<meta name="description" content="Webby-caliber native iOS comps for Aspen Dental and ClearChoice. Four customer journeys, multi-device staging, $42M year-one business case. Built by Branding Brand.">
+<meta name="author" content="Branding Brand · Chris Mason">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Aspen Dental & ClearChoice · Native iOS, played out.">
+<meta property="og:description" content="Four cinematic customer journeys. Multi-device staging. $42M year-one business case. Webby-caliber comps for TAG · by Branding Brand.">
+<meta property="og:image" content="https://christophermason.github.io/tag-mockup-aspen-clearchoice/brand/photos/B1_cc_hero.jpg">
+<meta property="og:image:width" content="1536">
+<meta property="og:image:height" content="1024">
+<meta property="og:url" content="https://christophermason.github.io/tag-mockup-aspen-clearchoice/">
+<meta property="og:site_name" content="Branding Brand · TAG">
+
+<!-- Twitter / iMessage -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Aspen Dental & ClearChoice · Native iOS, played out.">
+<meta name="twitter:description" content="Four cinematic customer journeys. Multi-device staging. $42M year-one business case. Built by Branding Brand.">
+<meta name="twitter:image" content="https://christophermason.github.io/tag-mockup-aspen-clearchoice/brand/photos/B1_cc_hero.jpg">
+
+<!-- Favicon (inline SVG, no extra file) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23002855'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' dominant-baseline='central' font-family='Playfair Display,serif' font-style='italic' font-size='32' fill='%23C9A763' font-weight='500'%3EA%26C%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="brand/photos/B1_cc_hero.jpg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -3282,9 +3305,124 @@ a { color: inherit; text-decoration: none; }
   margin-top: 6px;
 }
 
+/* ═══════════════════════════════════════════════════════════ */
+/*                  COUNT-UP TARGETS (Apple-keynote feel)        */
+/* ═══════════════════════════════════════════════════════════ */
+.count-anim {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  transition: opacity 200ms ease-out;
+}
+.count-anim.pre-anim { opacity: 0.15; }
+
+/* ═══════════════════════════════════════════════════════════ */
+/*                  LIVE BADGE (top right)                       */
+/* ═══════════════════════════════════════════════════════════ */
+.live-badge {
+  position: fixed;
+  top: 16px; right: 20px;
+  z-index: 999;
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 14px 8px 12px;
+  background: rgba(20,20,26,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,107,71,0.25);
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--page-text);
+}
+.live-badge::before {
+  content: '';
+  width: 7px; height: 7px;
+  background: #4FE070;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(79,224,112,0.6);
+  animation: live-pulse 1.6s infinite;
+}
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.5; transform: scale(0.85); }
+}
+.live-badge b { color: var(--page-accent); font-weight: 400; }
+
+/* ═══════════════════════════════════════════════════════════ */
+/*               MOBILE / TABLET RESPONSIVE                      */
+/* ═══════════════════════════════════════════════════════════ */
+@media (max-width: 1280px) {
+  .showcase-header,
+  .pulls,
+  .launch-inner,
+  .multi-device-inner,
+  .bc-inner,
+  .section,
+  .dna,
+  .watch-row,
+  .inventory,
+  .motion,
+  .footer { padding-left: 48px; padding-right: 48px; }
+  .phone-grid { grid-template-columns: repeat(2, 1fr); gap: 64px 36px; }
+  .multi-device-stage { gap: 32px; }
+  .cinema-journey { grid-template-columns: 280px 1fr 280px; gap: 32px; }
+}
+
+@media (max-width: 1024px) {
+  .showcase-title { font-size: 56px; }
+  .cinema-master-title, .md-title, .bc-title { font-size: 48px; }
+  .section-name, .journey-title { font-size: 36px; }
+  .cinema-journey-title h3 { font-size: 36px; }
+  .multi-device-stage { grid-template-columns: 1fr; gap: 48px; justify-content: center; }
+  .multi-device-stage::before { display: none; }
+  .multi-device-stage .ipad { transform: scale(0.65); transform-origin: top center; margin-bottom: -180px; }
+  .bc-summary { grid-template-columns: 1fr; gap: 32px; }
+  .bc-grid { grid-template-columns: 1fr; gap: 32px; }
+  .inventory-grid { grid-template-columns: 1fr; gap: 32px; }
+  .dna { grid-template-columns: 1fr; gap: 32px; }
+  .pulls { grid-template-columns: 1fr; gap: 24px; }
+  .showcase-meta { grid-template-columns: repeat(2,1fr); gap: 24px; }
+  .cinema-journey {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .cinema-journey-persona, .cinema-voice { position: static; }
+  .journey-strip.scale .phone-wrap { width: 180px; height: 400px; }
+  .journey-strip.scale .phone { transform: scale(0.5); }
+}
+
+@media (max-width: 720px) {
+  .showcase-header { padding: 64px 24px 48px; }
+  .showcase-title { font-size: 36px; line-height: 1.05; }
+  .showcase-deck { font-size: 16px; }
+  .showcase-meta { grid-template-columns: 1fr; gap: 18px; }
+  .pulls, .launch-inner, .bc-inner, .multi-device-inner, .section, .dna, .watch-row, .inventory, .motion, .footer { padding-left: 24px; padding-right: 24px; }
+  .phone-grid { grid-template-columns: 1fr; gap: 56px; }
+  .launch-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .launch-grid .phone { transform: scale(0.62); margin: 0 -80px -220px; }
+  .cinema-master-title, .md-title, .bc-title { font-size: 34px; }
+  .section-name, .journey-title { font-size: 26px; }
+  .bc-title { font-size: 36px; }
+  .watch-row { grid-template-columns: 1fr; gap: 24px; }
+  .watch-cell { padding: 32px; }
+  .inv-block { padding: 24px; }
+  .motion-row { grid-template-columns: 40px 1fr; gap: 12px; }
+  .motion-row .m-spec, .motion-row .m-curve, .motion-row .m-haptic { display: none; }
+  .live-badge { top: 8px; right: 8px; padding: 6px 10px 6px 8px; font-size: 9px; }
+  .footer { flex-direction: column; gap: 16px; align-items: flex-start; }
+  .journey-strip.scale .phone-wrap { width: 130px; height: 290px; }
+  .journey-strip.scale .phone { transform: scale(0.35); }
+}
+
 </style>
 </head>
 <body>
+
+<!-- Live badge -->
+<div class="live-badge">
+  <span><b>LIVE</b> · v1 · TAG Mockup</span>
+</div>
 
 <!-- ═════════════════════════════════════════════════════════ -->
 <!--                       HERO HEADER                          -->
@@ -6468,6 +6606,72 @@ document.querySelectorAll('.phone-grid .phone').forEach((phone, i) => {
 // ═══════════════════════════════════════════════════════════
 
 // Optional: leave static for design clarity (real clock would distract)
+
+// ═══════════════════════════════════════════════════════════
+//        APPLE-KEYNOTE COUNT-UP ON BUSINESS CASE NUMBERS
+// ═══════════════════════════════════════════════════════════
+
+(function () {
+  const targets = document.querySelectorAll('.bc-stat .stat-big, .bc-tot-val');
+  const NUMERIC_RE = /(\d+\.?\d*)/g;
+
+  targets.forEach(el => {
+    const originalHTML = el.innerHTML;
+    // Parse numbers in document order, store them, replace with span placeholders
+    let i = 0;
+    const parsedNumbers = [];
+    const replaced = originalHTML.replace(/(<i>)?(\d+\.?\d*)(<\/i>)?/g, (m, openI, num, closeI) => {
+      parsedNumbers.push(parseFloat(num));
+      const cls = 'count-anim pre-anim';
+      const tag = `<span class="${cls}" data-to="${num}" data-idx="${i}">0</span>`;
+      i++;
+      return (openI || '') + tag + (closeI || '');
+    });
+    el.innerHTML = replaced;
+    el.dataset.originalHtml = originalHTML;
+    el.dataset.parsedCount = parsedNumbers.length;
+  });
+
+  // Animate when scrolled into view
+  const ease = t => 1 - Math.pow(1 - t, 3); // ease-out cubic
+  const formatNum = (n, originalStr) => {
+    // If original string had decimal, preserve it
+    const hasDecimal = originalStr.includes('.');
+    if (hasDecimal) return n.toFixed(1);
+    return Math.round(n).toLocaleString('en-US');
+  };
+
+  const animate = (span) => {
+    const target = parseFloat(span.dataset.to);
+    if (isNaN(target)) return;
+    const originalStr = span.dataset.to;
+    const duration = 1400;
+    const start = performance.now();
+    span.classList.remove('pre-anim');
+    function tick(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const v = target * ease(t);
+      span.textContent = formatNum(v, originalStr);
+      if (t < 1) requestAnimationFrame(tick);
+      else span.textContent = formatNum(target, originalStr);
+    }
+    requestAnimationFrame(tick);
+  };
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const spans = entry.target.querySelectorAll('.count-anim');
+        spans.forEach((span, idx) => {
+          setTimeout(() => animate(span), idx * 80); // stagger by 80ms
+        });
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5, rootMargin: '0px 0px -20% 0px' });
+
+  targets.forEach(el => obs.observe(el));
+})();
 </script>
 
 </body>
